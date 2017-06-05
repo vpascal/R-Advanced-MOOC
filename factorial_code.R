@@ -1,3 +1,7 @@
+
+# Factorial via loop --------------------------------------------------------------------------
+
+
 factorial_loop <- function(x) {
   if (x == 1) {
     print(1)
@@ -11,10 +15,8 @@ factorial_loop <- function(x) {
   }
 }
 
-# factorial_loop(1)
-# factorial_loop(2)
-# factorial_loop(5)
-# factorial_loop(6)
+
+# Factorial via reduce ------------------------------------------------------------------------
 
 
 factorial_reduce <- function(x){
@@ -23,10 +25,8 @@ factorial_reduce <- function(x){
   
 }
 
-# factorial_reduce(1)
-# factorial_reduce(2)
-# factorial_reduce(5)
-# factorial_reduce(6)
+
+# Factorial via recursion ---------------------------------------------------------------------
 
 
 factorial_func <- function(x) {
@@ -40,6 +40,7 @@ factorial_func <- function(x) {
   }
 }
 
-#factorial_func(1)
-#factorial_func(10)
+
+# Factorial via memoization -------------------------------------------------------------------
+
 
