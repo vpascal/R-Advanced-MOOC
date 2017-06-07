@@ -42,7 +42,32 @@ factorial_func <- function(x) {
 
 # Factorial via memoization -------------------------------------------------------------------
 
+result <- 1
+
 factorial_mem <- function(x){
+
   
+  if (x == 1) {
+    1
+  } else if (x < length(result) | x == length(result) ) {return(result[x])}
+  else {
+    
+    result[x]  <<-  x * factorial_func(x - 1)
+    result[x]
+  }
   
 }
+
+factorial_mem(8)
+
+
+# Testing -----------------------------------------------------------------
+
+# Let's make sure all four functions return the same values
+
+library(microbenchmark)
+microbenchmark(
+  factorial_loop(8),
+  factorial_reduce(8),
+  factorial_func(8),
+  factorial_mem(8))
