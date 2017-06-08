@@ -6,6 +6,7 @@ make_LD <- function(x){
   
 }
 
+
 print.LongitudinalData <- function(x){
   
   paste("Longitudinal dataset with",length(unique(x$data$id)),"subjects")
@@ -23,6 +24,7 @@ subject.LongitudinalData <- function(x, condition){
   if(!condition %in% x$data$id){NULL} else{
   temp <- x$data %>% filter(id == condition) #%>% 
   make_LD(temp)
+
   }
 }
 
@@ -65,6 +67,5 @@ summary.LongitudinalData <- function(x){
   spread(room,value)
   
 }
-
 
 
