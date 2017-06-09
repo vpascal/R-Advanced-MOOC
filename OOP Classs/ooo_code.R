@@ -6,13 +6,11 @@ make_LD <- function(x){
   
 }
 
-
 print.LongitudinalData <- function(x){
   
-  paste("Longitudinal dataset with",length(unique(x$data$id)),"subjects")
+  cat("Longitudinal dataset with",length(unique(x$data$id)),"subjects")
   
 }
-
 
 subject <- function(x,condition){
   UseMethod("subject", x)
@@ -20,20 +18,26 @@ subject <- function(x,condition){
 
 subject.LongitudinalData <- function(x, condition){
 
-  
   if(!condition %in% x$data$id){NULL} else{
-  temp <- x$data %>% filter(id == condition) #%>% 
-  make_LD(temp)
-
+  temp <- x$data %>% filter(id == condition) 
+  temp <- make_LD(temp)
+  class(temp) <- "subject"
+  temp
   }
 }
-
 
 visit <- function(x,condition){
   UseMethod("visit", x)
 }
 
 visit.LongitudinalData <- function(x, condition){
+  
+  temp <- x$data %>% filter(visit == condition) #%>% 
+  make_LD(temp)
+  
+}
+
+visit.subject <- function(x, condition){
   
   temp <- x$data %>% filter(visit == condition) #%>% 
   make_LD(temp)
@@ -53,19 +57,31 @@ room.LongitudinalData <- function(x, condition){
 }
 
 
-
 summary <- function(x,...){
   UseMethod("summary", x)
 }
 
 summary.LongitudinalData <- function(x){
   
-  x$data %>% #filter(id == condition) %>% 
+  x$data %>% 
   select(id, visit, room, value) %>% 
- # filter(room %in% c ("bedroom","den","living room","office")) %>% 
   group_by(visit, room) %>% summarise(value=mean(value)) %>% 
   spread(room,value)
   
 }
 
+print.subject <- function(x){
+  cat("Subject ID:",unique(x$data$id))
+  
+  
+}
+
+summary.subject <- function(x){
+    
+     x$data %>% 
+    select(id, visit, room, value) %>% 
+    group_by(visit, room) %>% summarise(value=mean(value)) %>% 
+    spread(room,value)
+
+}
 
