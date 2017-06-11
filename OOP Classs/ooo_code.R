@@ -67,7 +67,7 @@ summary.visit <- function(x){
 
 print.summaryvisit <- function(x){
   cat("ID:",x$id,"\n")
-  cat("Room:",x$visit, "\n\n")
+  cat("Visit:",x$visit, "\n\n")
   print(x$data)
 }
 
@@ -81,8 +81,13 @@ summary.room <- function(x){
   
   temp <- filter(x$data, room == x$room,id==x$id,visit==x$visit) %>% select(value) %>% 
   summary()  
-  
+  structure(list(data=temp,id=x$id,visit=x$visit,room=x$room),class="roomsummary")
 }
 
 
-#Need to implement new print method
+print.roomsummary <- function(x){
+  cat("ID:",x$id,"\n")
+  cat("Visit:",x$visit, "\n")
+  cat("Room:",x$room,"\n\n")
+  print(x$data)
+}

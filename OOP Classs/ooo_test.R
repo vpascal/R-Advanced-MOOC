@@ -1,11 +1,12 @@
 library(dplyr)
-# source("ooo_code.R")
-
+source("ooo_code.R")
 
 temp <- read.csv("data/MIE.csv")
 
 temp1 <- make_LD(temp)
+
 class(temp1)
+
 print(temp1)
 
 
